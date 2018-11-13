@@ -1,5 +1,5 @@
-#include <string>
 #include <iostream>
+#include <iomanip>                      //parameterized stream manipulators
 #include "GradeBook.h"
 
 using namespace std;
@@ -32,21 +32,34 @@ void GradeBook::displayMessage() const
 
 void GradeBook::determineClassAverage() const
 {
+    // Initialization phase
     int total = 0;
     unsigned int gradeCounter = 0;
     
-    while (gradeCounter < 10)
+    // processing phase
+    cout << "Grade: (-1 to qute) ";
+    int grade = 0;
+    cin >> grade;
+    
+    // loop until sentineal is read from user
+    while(grade != -1)
     {
-        cout << "grade: ";
-        int grade;
-        cin >> grade;
-        total += grade;
         gradeCounter++;
+        total += grade;
+        
+        cout << "Next grade: ";
+        cin >> grade;
     }
     
-    int average = total /10;
-    cout << "Average: " << average << endl;
-    
+    if (gradeCounter != 0)
+    {
+        double average = static_cast< double > (total)/ gradeCounter;
+        cout<< "Grades entered: " << gradeCounter << endl;
+        
+        cout << setprecision (2)<< fixed;
+        cout << "class average is: " << average << endl;
+        
+    }
     
 }
 
